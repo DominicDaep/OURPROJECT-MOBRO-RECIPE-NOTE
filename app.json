@@ -8,7 +8,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/ourlogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,9 +23,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/ourlogo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.domdaep.MINIPROJECTFOOD"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
