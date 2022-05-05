@@ -1,7 +1,7 @@
-import AddNoteScreen from "./AddNoteScreen";
-import EditNotescreen from "./EditNotescreen";
+import AddRecipe from "./AddRecipe";
+import EditRecipe from "./EditRecipe";
 
 export {
-    AddNoteScreen,
-    EditNotescreen
+    AddRecipe,
+    EditRecipe
 }

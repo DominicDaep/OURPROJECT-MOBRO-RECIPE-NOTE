@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native';
 import { NoteParamList } from '../types';
-import { AddNoteScreen, EditNotescreen } from '../screens/Note';
+import { AddRecipe, EditRecipe } from '../screens/Note';
 import Colors from '../constants/Colors';
 
 const Stack = createStackNavigator<NoteParamList>();
@@ -12,7 +12,7 @@ const Stack = createStackNavigator<NoteParamList>();
 export default function NoteNavigator() {
     return (
         <Stack.Navigator
-            initialRouteName='AddNote'
+            initialRouteName='AddRecipe'
             screenOptions={({ navigation }) => ({
                 title: 'Add Note',
                 headerTitleAlign: 'center',
@@ -61,13 +61,13 @@ export default function NoteNavigator() {
                     title: 'Edit Note',
                     
                 }}
-                name="EditNote" component={EditNotescreen}
+                name="EditRecipe" component={EditRecipe}
             />
             <Stack.Screen
                 options={{
-                    title: 'Add Note'
+                    title: 'Add Recipe'
                 }}
-                name="AddNote" component={AddNoteScreen}
+                name="AddRecipe" component={AddRecipe}
             />
         </Stack.Navigator>
     );

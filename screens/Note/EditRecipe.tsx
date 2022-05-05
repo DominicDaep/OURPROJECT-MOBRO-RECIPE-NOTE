@@ -1,54 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Dimensions, ImageBackground } from 'react-native';
-import { TextInput } from 'react-native-paper';
 import { Button } from 'react-native-elements';
 import Colors from '../../constants/Colors';
-import { getData, removeData, storeData } from '../../database/StoreData';
+import { getData, removeData, Data } from '../../database/Data';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { HomeParamList } from '../../types';
+import { StyleSheet, View, Dimensions, ImageBackground } from 'react-native';
+import { TextInput } from 'react-native-paper';
+
 
 type IRoute = {
     "params": HomeParamList['EditNote'];
 }
 
-export default function AddNoteScreen() {
+export default function EditRecipe() {
     const route = useRoute<RouteProp<IRoute, "params">>();
     const note = route.params.note;
-    const index = route.params.index;
-
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const navigation = useNavigation();
-
     const [loading, setLoading] = useState<boolean>(false)
-
-    const submitNote = async () => {
-        setLoading(true)
-        setTimeout(async () => {
-            const data = {
-                title: title,
-                description: description,
-                time: Date.now()
-            }
-            const noteList = await getData('noteList');
-            if (noteList) {
-                const json = JSON.parse(noteList);
-                json[index] = data;
-                storeData('noteList', JSON.stringify(json));
-            } else {
-                storeData('noteList', JSON.stringify([data]));
-            }
-            setTitle('');
-            setDescription('');
-
-            navigation.navigate("Recipes", {
-                screen: "HomePage"
-            }
-            )
-            setLoading(false)
-
-        }, 1200)
-    }
+    
     useEffect(() => {
         setTitle(note.title);
         setDescription(note.description)

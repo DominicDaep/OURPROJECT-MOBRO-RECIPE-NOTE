@@ -1,16 +1,12 @@
 import { AntDesign, Ionicons } from '@expo/vector-icons';
+import Colors from '../../constants/Colors';
+import { getData } from '../../database/Data';
+import { Notes } from '../../models/Notes';
+import ViewWithLoading from '../../components/ViewWithLoading';
 import { useFocusEffect, useNavigation,   } from '@react-navigation/native';
 import { Fragment,useEffect } from "react";
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, ScrollView, Dimensions, TextInput, BackHandler, ImageBackground } from 'react-native';
-import Colors from '../../constants/Colors';
-import { getData } from '../../database/StoreData';
-import { Notes } from '../../models/Notes';
-import Lottieview from "lottie-react-native";
-import ViewWithLoading from '../../components/ViewWithLoading';
-
-
-
 
 
 export default function HomePageScreen() {
@@ -18,9 +14,6 @@ export default function HomePageScreen() {
   const image = { uri: "https://images.unsplash.com/photo-1532980400857-e8d9d275d858?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80" };
 
   const [note, setNote] = useState<Array<Notes> | null>(null);
-  const [search, setSearch] = useState<string>('')
-  const [searchRes, setSearchRes] = useState<boolean>(false)
-
   const navigation = useNavigation();
 
   const retrieveData = async () => {
@@ -29,31 +22,6 @@ export default function HomePageScreen() {
       const json = JSON.parse(noteList);
       setNote(json);
     }
-  }
-
-  const handleSearch = (text) => {
-    setSearch(text);
-    if (!text.trim()) {
-      setSearch('')
-      setSearchRes(false)
-      retrieveData()
-    }
-    const filteredNote = note?.filter(notes => {
-      if (notes.title.toLowerCase().includes(text.toLowerCase())) {
-        return notes;
-      }
-    })
-    if (filteredNote?.length) {
-      setNote([...filteredNote])
-    } else {
-      setSearchRes(true)
-    }
-  }
-
-  const handleClear = () => {
-    setSearch('')
-    setSearchRes(false)
-    retrieveData()
   }
 
   useFocusEffect(
@@ -74,33 +42,13 @@ export default function HomePageScreen() {
     <ViewWithLoading loading={loading}>
       <ImageBackground  source={image} resizeMode="cover" style = {styles.background}>
 <View style={styles.container}>
-      {note?.length ?
-        <View
-          style={styles.searchbarContainer}
-        >
-          
-          {search ? (
-            <AntDesign
-              name='close'
-              size={20}
-              color={Colors.txt}
-              onPress={handleClear}
-              style={styles.clearIcon}
-            />
-          ) : null}
+  
         </View>
         
-        : null}
-      {searchRes ?
         <View
           style={[StyleSheet.absoluteFillObject, styles.emptyHeaderContainer]}
         >
           
-          <Text
-            style={styles.emptyHeader}
-          >
-            Note not found!!
-          </Text>
         </View>
         :
         <ScrollView style={styles.listcontainer}>
@@ -119,7 +67,6 @@ export default function HomePageScreen() {
                   navigation.navigate("NoteView", {
                     note: notes, index: index
                   });
-                  setSearch('')
                 }}
               >
              
@@ -180,7 +127,7 @@ export default function HomePageScreen() {
           <Text
             style={styles.emptyHeader}
           >
-            Add Note
+            Add Recipe
           </Text>
         </View>
         : null}
@@ -188,11 +135,7 @@ export default function HomePageScreen() {
 </ImageBackground>
   
       </ViewWithLoading>
-  
-
-
-
-    
+   
   );
 }
 

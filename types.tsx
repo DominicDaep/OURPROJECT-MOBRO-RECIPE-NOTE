@@ -16,9 +16,6 @@ declare global {
 
 export type RootStackParamList = {
   Recipes: undefined;
-  Developers: undefined;
-  About: undefined;
-  Settings: undefined;
   Gallery: undefined;
   Note: undefined;
 };

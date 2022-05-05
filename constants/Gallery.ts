@@ -1,4 +1,9 @@
-const Guide = [
+
+
+
+const Gallery = [
+
+    // images for the gallery of foods
     {
         image: require("../components/images/image1.jpg")
     },
@@ -29,4 +34,4 @@ const Guide = [
    
 ]
 
-export default Guide;
+export default Gallery;
